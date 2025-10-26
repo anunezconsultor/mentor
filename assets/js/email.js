@@ -1,4 +1,4 @@
-document.getElementById("contact-form").addEventListener("submit", async (e) => {
+document.getElementById("contact-form").addEventListener("submit", () => {
   e.preventDefault();
   const formData = Object.fromEntries(new FormData(e.target).entries());
 
@@ -20,13 +20,13 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
     var checkboxElement = form.querySelector('input[name="policy"]');
     checkboxElement.checked = false;
 
-  const res = await fetch("/.netlify/functions/send-email", {
+  const res = fetch("/.netlify/functions/send-email", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData),
   });
   
-  const data = await res.json();
+  const data = res.json();
 
   if (data.success) {
     document.querySelector(".sent-message").style.display = "block";

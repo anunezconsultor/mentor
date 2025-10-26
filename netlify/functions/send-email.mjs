@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-export async function handler(event) {
+export function handler(event) {
 
   const bodyString = event.isBase64Encoded
     ? Buffer.from(event.body, "base64").toString("utf8")
@@ -17,7 +17,7 @@ export async function handler(event) {
   });
 
   try {
-    await transporter.sendMail({
+    transporter.sendMail({
       from: `"${name}" <${process.env.GMAIL_USER}>`,
       to: process.env.RECEIVING_EMAIL,
       subject,
