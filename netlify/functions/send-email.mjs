@@ -1,7 +1,12 @@
 import nodemailer from "nodemailer";
 
 export async function handler(event) {
-  const { name, email, subject, message } = JSON.parse(event.body);
+
+  const bodyString = event.isBase64Encoded
+    ? Buffer.from(event.body, "base64").toString("utf8")
+    : event.body;
+
+  const { name, email, subject, message } = JSON.parse(bodyString);
 
   const transporter = nodemailer.createTransport({
     service: "gmail",

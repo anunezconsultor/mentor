@@ -9,4 +9,10 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
   });
   
   const data = await res.json();
+
+  if (data.success) {
+    document.querySelector(".sent-message").style.display = "block";
+  } else {
+    document.querySelector(".error-message").textContent = data.error || "Error al enviar el correo.";
+  }
 });
