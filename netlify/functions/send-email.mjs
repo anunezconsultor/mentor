@@ -13,10 +13,10 @@ export async function handler(event) {
 
   try {
     await transporter.sendMail({
-      from: `"${name}" <${email}>`,
+      from: `"${name}" <${process.env.GMAIL_USER}>`,
       to: process.env.RECEIVING_EMAIL,
       subject,
-      text: message,
+      text: `Correo: ${email}. Mensaje: ${message}`,
     });
 
     return {
